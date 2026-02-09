@@ -6,9 +6,22 @@ jobs:
     name: Unit Tests
     steps:
       - uses: actions/checkout@v2
+
       - name: Setup node
         uses: actions/setup-node@v1
         with:
           node-version: 16
-      - run: yarn install --frozen-lockfile
-      - run: yarn test
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Check Node.js and Yarn versions
+        run: |
+          node --version
+          yarn --version
+
+      - name: List Installed Dependencies
+        run: yarn list
+
+      - name: Run Unit Tests
+        run: yarn test --verbose
